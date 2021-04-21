@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;;
+        background: pink;
+        position: absolute;
+        left: 0px;
+        top: 50px;
+    }
+    </style>
+</head>
+<body>
+    <input type="button" value="400px" id="btn1">
+    <input type="button" value="800px" id="btn2">
+    <div id="box"></div> 
+    <script>
+        var box = document.getElementById('box'); 
+        function animation(element,target){
+            clearInterval(element.timer);
+            element.timer=setInterval(function(){
+                var current = element.offsetLeft;
+                var step = 10;
+                step=current<target?step:-step;
+                current+=step;
+                if(Math.abs(target-current)>Math.abs(step)){
+                    element.style.left = current+'px';
+                }else{
+                    clearInterval(element.timer);
+                    element.style.left = target+'px';
+                }
+            },20)
+        }
+        
+        document.getElementById('btn1').onclick=function(){
+            animation(box,400)
+        }
+        document.getElementById('btn2').onclick=function(){
+            animation(box,800)
+        }   
+    </script>
+</body>
+</html>

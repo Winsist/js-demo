@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        position: relative;
+    }
+    #btn{
+        width: 100px;
+        height: 100px;
+        background: red;
+        border: 0;
+        outline: none;
+        border-radius: 50px;
+    }
+    img{
+        position: absolute;
+        left: 18px;
+        top:18px;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="text" id="btn">
+        <img src="./images/search.png" alt="">
+    </div>
+
+    <script>
+    
+    var btn = document.getElementById('btn');
+    btn.onmouseenter=function(){
+        var w = 100;
+        var time = setInterval(function(){
+            w+=20;
+            if(w<=500){
+                btn.style.width=w+"px";
+            }      
+        },20)
+    }
+    btn.onmouseleave=function(){
+        var w = 500;
+        var time = setInterval(function(){
+            w-=20;
+            if(w>=100){
+                btn.style.width=w+"px";
+            }      
+        },20)
+    }
+    
+    </script>
+</body>
+</html>

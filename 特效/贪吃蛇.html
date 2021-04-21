@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .map {
+            width: 800px;
+            height: 600px;
+            background: #ccc;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map"></div>
+    <script>
+        //面向对象的变成思想：根据需求，抽象出相关的对象，总结对象的特征和行为，把特征变成属性，行为变成方法，然后定义(js)构造函数，实例化对象，通过对象调用属性和方法，完成相应的需求。
+
+        //产生随机数对象
+        (function (window) {
+            function Random() { };
+            Random.prototype.getRandom = function (min, max) {
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+            window.Random = new Random();   //把局部变量暴露给window顶级对象，就成了全局对象
+        })(window); //分号一定要记得加
+
+        //产生小方块对象
+        (function (window) {
+            console.log(Random.getRandom(0,5));
+            //因为在地图上产生小方块，所以要先拿到地图
+            var map = document.getElementsByClassName('map')[0];
+            //小方块是食物，所以得创建一个食物的构造函数
+            //食物的构造函数
+            function Food(width, height, color) {
+                this.width = width || 20; //this指的是实例对象
+                this.height = height || 20;
+                this.color = color;
+                this.x=0;   //横坐标随机产生的
+                this.y=0;   //纵坐标随机产生的
+                this.ele=document.createElement('div'); //创建小方块这个元素
+            }
+            //初始化小方块的显示的效果及位置------显示在地图上
+            Food.prototype.init=function(map){
+                //设置小方块的样式
+                var div=this.ele;   //这里this指的也是实例对象
+                div.style.position="absolute";  //脱离文档流
+                div.style.width=this.width+'px';
+                div.style.height=this.height+'px';
+                div.style.backgroundColor=this.color;
+                //把小方块加到map地图中
+                map.appendChild(div);
+                this.render(map);
+            };
+            //产生随机位置
+            Food.prototype.render=function(map){
+                //随机产生横纵坐标
+                var x=Random.getRandom(0,map.offsetWidth/this.width)*this.width;
+                var y=Random.getRandom(0,map.offsetHeight/this.width)*this.height;
+                this.x=x;
+                this.y=y;
+                //此时要找到div
+                var div=this.ele;
+                div.style.left=this.x+'px';
+                div.style.top=this.y+'px';
+            }
+
+            var fd=new Food(20,20,'red');
+            fd.init(map);
+        })(window);
+
+
+        //面向对象的变成思想：根据需求，抽象出相关的对象，总结对象的特征和行为，把特征变成属性，行为变成方法，然后定义(js)构造函数，实例化对象，通过对象调用属性和方法，完成相应的需求。
+
+        //私有的函数：外部不能访问，自己访问
+
+        //方法：bind(对象)
+        //今日目标：封装三个对象：食物，蛇，游戏
+
+
+
+
+
+
+
+        
+    </script>
+</body>
+
+</html>

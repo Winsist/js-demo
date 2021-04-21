@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    img{
+        position: absolute;
+    }
+    body{
+        height: 2000px;
+    }
+    </style>
+</head>
+<body>
+    <img src="images/tianshi.gif" alt="" id="im">
+    <script>
+        function getScroll(){
+            return {
+                left:window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+                top:window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
+            }
+        }   
+        var im = document.getElementById('im');
+        document.onmousemove=function(e){
+            e = window.event || e;  
+            console.log(e.clientX) ;           //因为e在IE8中是不支持的  
+            console.log(getScroll().left) ;
+            im.style.left=e.clientX+getScroll().left+'px';       //clientX  可视区域
+            im.style.top=e.clientY+getScroll().top+'px';
+        }
+
+
+    //pageX、pageY就是鼠标相对于页面的边界的坐标（clientX+向左卷曲出去的距离=pageX）,但是IE8中不支持这两个属性，所以还是得用clientX+向左卷曲出去的距离
+    
+    </script>
+</body>
+</html>

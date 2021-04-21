@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>放大镜</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 351px;
+            height: 468px;
+            margin: 50px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        #big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        #mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            cursor: move;
+            display: none;
+        }
+
+        #small {
+            position: relative;
+        }
+
+    
+    
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="small">
+            <img src="./images/small.png" width="350" alt="">
+            <div id="mask"></div>
+        </div>
+        <div id="big">
+            <img src="./images/big.jpg" width="800" alt="">
+        </div>
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        var mask = document.getElementById('mask');
+        var small = document.getElementById('small');
+        var big = document.getElementById('big');
+        //进入
+        box.onmouseover=function(){
+            mask.style.display='block';
+            big.style.display='block';
+        }
+        //离开
+        box.onmouseout=function(){
+            mask.style.display='none';
+            big.style.display='none';
+        }
+        
+        small.onmousemove=function(e){
+            var x = e.clientX-mask.offsetWidth/2;
+            var y = e.clientY-mask.offsetHeight/2;
+            x = x - 50;
+            y = y - 50;
+            //最小值
+            x = x < 0 ? 0 : x;
+            y = y <0 ? 0 : y;
+            //最大值
+            x = x > small.offsetWidth-mask.offsetWidth ? small.offsetWidth-mask.offsetWidth : x;
+            y = y > small.offsetHeight-mask.offsetHeight ? small.offsetHeight-mask.offsetHeight : y;
+            mask.style.left = x +'px';
+            mask.style.top= y +'px';
+
+            var maskMoveMaxX = small.offsetWidth - mask.offsetWidth;
+            var maskMoveMaxY = small.offsetHeight - mask.offsetHeight;
+            var bigMoveMaxX = big.children[0].offsetWidth - big.offsetWidth;
+            var bigMoveMaxY = big.children[0].offsetHeight - big.offsetHeight;
+
+            var bigImgX = x * bigMoveMaxX / maskMoveMaxX;
+            var bigImgY = y * bigMoveMaxY / maskMoveMaxY;
+            
+            big.children[0].style.marginLeft = -bigImgX +'px';
+            big.children[0].style.marginTop = -bigImgY +'px';
+
+            
+
+            //遮挡层的移动距离/大图的移动距离=遮挡层的最大移动距离/大图的最大移动距离
+            //大图的移动距离=遮挡层的移动距离*大图的最大移动距离/遮挡层的最大移动距离
+
+        }
+    </script>
+</body>
+</html>
