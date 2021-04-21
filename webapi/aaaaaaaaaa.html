@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="ui-header"><span class="ui-header-left"><i class="iconfont ui-return">&#xe617;</i></span>
+        <h1 class="ui-header-title"><%=pageName%></h1>
+    </header>
+    <div class="ui-searchbar-wrap">
+        <div class="ui-searchbar info"><i class="iconfont">&#xe602;</i>
+            <div class="ui-searchbar-text">工号或姓名</div>
+        </div>
+        <div class="ui-searchbar">
+            <div class="ui-searchbar-input"><input value="" type="text" placeholder="工号或姓名" autocapitalize="off"></div>
+        </div><button class="ui-searchbar-cancel" style="z-index:200">搜索</button>
+    </div>
+    <div class="search-letter" id="letter" style="margin-top:3rem">
+        <div style="display:table-cell;vertical-align: middle;padding-bottom:88px;">
+            <%for(var j=0;j<allList.length;j++){var letter=allList[j].letter;%><a data-id="#<%=letter%>"
+                class="scrollTo"><%=letter%></a><%}%></div></div><section class="wrapper-content inside searchListss"id="wrapperContact"><div class="wrapper-scroll"><div id="serRes"></div><%if(allList.length>0){%><%for(var j=0;j<allList.length;j++){var letter=allList[j].letter,content=allList[j].content;%>
+            <dl class="search-result-item" id="<%=letter%>">
+                <dt class="search-result-item-name"><%=letter%></dt>
+                <dd data-id="" data-firstLetter="" data-letter="" class="search-result-item-content">
+                    <%for(var i=0;i<content.length;i++){var cards=content[i].cards;%><dl class="ui-contacts">
+                        <dt class="ui-contacts-title" style="position:relative"
+                            data-contactsname="<%=content[i].contactsName%>" data-friId="<%=content[i].friId%>"
+                            data-contactsrelation="<%=content[i].contactsRelation%>"
+                            data-contactsid="<%=content[i].contactsId?content[i].contactsId:""%>">
+                            <div class="ui-contacts-wrap"><img src="../images/mui/mui_02.png"
+                                    onerror="onerror=null;src=\'../images/mui/mui_02.png\'" class="ui-contacts-head">
+                                <div style="margin-left: 0.5rem;line-height: 1.5em;">
+                                    <%=content[i].contactsName%><br><span
+                                        style="color:#9e9e9e"><%if(content[i].contactsId){%>工号：<%=content[i].contactsId%><%}%></span></div></div></dt></dl><%}%>
+                </dd>
+            </dl><%}%><%}%></div>
+        </section>
+</body>
+
+</html>

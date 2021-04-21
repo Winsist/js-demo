@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var foo = {
+            value: 1
+        };
+
+        var bar = function (name, age) {
+            console.log(name);
+            console.log(age);
+            console.log(this.value);
+        }
+        var obj = {}
+
+        // var bindFoo = bar.bind(foo);
+
+        // console.log(bindFoo);
+        // console.log(bindFoo == bar);
+
+        // console.log(bindFoo()); // 1
+        // Function.prototype.myBind = function (context) {
+        //     var self = this;
+        //     console.log(this);
+        //     console.log(arguments);
+        //     console.log(Array.prototype.slice.call(arguments));
+        //     // 获取bind2函数从第二个参数到最后一个参数
+        //     var args = Array.prototype.slice.call(arguments, 1);
+        //     console.log(args);
+
+        //     return function () {
+        //         // 这个时候的arguments是指bind返回的函数传入的参数
+        //         var bindArgs = Array.prototype.slice.call(arguments);
+        //         return self.apply(context, args.concat(bindArgs));
+        //     }
+
+        // }
+
+        // Function.prototype.myBind = function (context) {
+        //     var self = this;//this为调用myBind的方法
+        //     // 获取bind2函数从第二个参数到最后一个参数
+        //     var args = Array.from(arguments).slice(1);
+        //     // console.log(args);
+
+        //     return function () {
+        //         // 这个时候的arguments是指bind返回的函数传入的参数,没有转换后就是空数组
+        //         var bindArgs = Array.from(arguments);
+        //         // console.log(args);
+        //         // console.log(bindArgs);
+        //         // console.log(args.concat(bindArgs));
+        //         return self.apply(context, args.concat(bindArgs));
+        //     }
+
+        // }
+
+        // Function.prototype.myBind = function () {
+        //     var self = this;//this为调用myBind的方法
+        //     var args = Array.from(arguments);
+        //     // 获取myBind函数的第一个参数
+        //     var ctx = args.shift();//shift返回数组第一项，并且改变原数组，此时args为bind剩下的参数
+        //     console.log(ctx);
+        //     console.log(args);
+        //     return function () {
+        //         // 这个时候的arguments是指bind返回的函数传入的参数,没有，转换后就是空数组
+        //         var bindArgs = Array.from(arguments);
+        //         return self.apply(ctx, args.concat(bindArgs));
+        //     }
+
+        // }
+
+        //但是以上存在一个问题，bind返回的函数被当做构造函数实例化了，那么this绑定就失效了，因为new>显示绑定
+        Function.prototype.myBind = function (context) {
+            var self = this;//this为调用myBind的方法
+            var args = Array.from(arguments).slice(1);
+            var fNOP = function () { };
+            var fBound = function () {
+                var bindArgs = Array.from(arguments);
+                return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
+            }
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+            return fBound;
+        }
+
+        var bindFoo = bar.myBind(foo, 'wmy');
+        console.log(new bindFoo(18))
+
+    </script>
+</body>
+
+</html>

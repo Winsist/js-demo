@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <span class="btn1">点赞</span>
+        <span class="count">0</span>
+    </div>
+    <div>
+        <span class="btn2">点赞</span>
+        <span class="count">0</span>
+    </div>
+    <ul>
+        <li >
+            <input type="button" value="点赞0" class="item">
+        </li>
+        <li >
+            <input type="button" value="点赞0" class="item">
+        </li>
+    </ul>
+    <script>
+        //点赞案例
+        var liList = document.getElementsByClassName('item');
+        function f1(){
+            var count = 1;
+            return function(){
+                this.value = `点赞${count++}`;
+            }
+        }
+        console.log(liList);
+        for(var i=0;i<liList.length;i++){
+            liList[i].onclick=f1()
+        }
+    </script>
+</body>
+</html>

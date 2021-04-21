@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function add() {
+        //     var args = [...arguments];
+        //     var fn = function () {
+        //         args.push(...arguments);
+        //         return fn
+        //     };
+        //     fn.toString = function () {
+        //         return _args.reduce(function (a, b) {
+        //             return a + b;
+        //         });
+        //     };
+        //     return fn
+        // }
+        // console.log(add(1)(1, 2, 3)(2)) // 9
+
+        // function curry(fn, args = []) {
+        //     return function () {
+        //         let rest = [...args, ...arguments];
+        //         if (rest.length < fn.length) {
+        //             return curry.call(this, fn, rest);
+        //         } else {
+        //             return fn.apply(this, rest);
+        //         }
+        //     }
+        // }
+        // //test
+        // function sum(a, b, c) {
+        //     return a + b + c;
+        // }
+        // let sumFn = curry(sum);
+        // console.log(sumFn(1)(2)(3)); //6
+        // console.log(sumFn(1)(2, 3)); //6
+
+        function add() {
+            const numberList = Array.from(arguments);
+
+            // 进一步收集剩余参数
+            const calculate = function () {
+                numberList.push(...arguments);
+                return calculate;
+            }
+
+            // 利用 toString 隐式转换，最后执行时进行转换
+            calculate.toString = function () {
+                return numberList.reduce((a, b) => a + b, 0);
+            }
+
+            return calculate;
+        }
+
+        // 实现一个 add 方法，使计算结果能够满足以下预期
+        console.log(add(1)(2)(3)); // 6
+        console.log(add(1, 2, 3)(4)); // 10;
+        console.log(add(1)(2)(3)(4)(5)); // 15;
+
+        function getFib(x){
+        if(x==1 || x==2){
+            return 1;
+        }
+        return getFib(x-1)+getFib(x-2);
+    }
+    console.log(getFib(3));//144
+
+
+    </script>
+</body>
+
+</html>

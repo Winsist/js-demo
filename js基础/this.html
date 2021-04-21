@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var number = 5;
+        var obj = {
+            number: 3,
+            fn1: (function () {
+                var number;
+                this.number *= 2;//6
+                number = number * 2;//NaN
+                number = 3;
+                return function () {
+                    var num = this.number;//5
+                    this.number *= 2;//10
+                    console.log(num);//5
+                    number *= 3;//9
+                    console.log(number);//9
+                }
+            })()
+        }
+        var fn1 = obj.fn1;
+        fn1.call(null);//5,9
+        obj.fn1();//3,9
+        console.log(window.number);//10
+        // var x = 10;
+        // var obj = {
+        //     x:3,
+        //     eat:function(){
+        //         var x;
+        //         this.x *=2;
+        //         console.log(x);//undefined
+        //         console.log(x*2);//NaN
+        //         x=6;
+        //         return function(){
+        //             var y = this.x;
+        //             console.log(y);
+        //             console.log(x);
+        //         }
+        //     }
+        // }
+        // var res = obj.eat();
+        // res();
+
+    </script>
+</body>
+</html>

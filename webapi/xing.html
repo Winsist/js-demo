@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #box{
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: #000;
+        margin-top: 20px;
+    }
+    h2{
+        text-align: center;
+        color:pink;
+        padding-top: 50px;
+    }
+    span{
+        position: absolute;
+        color: red;
+        font-size: 40px;
+        transform: rotate(90deg);
+    }
+    </style>
+</head>
+<body>
+    <input type="button" value="start" id="btn">
+    <div id="box"></div>
+<script>
+    document.getElementById('btn').onclick=function(){
+        setInterval(function(){
+            let x = parseInt(Math.random()*1100);
+            let y = parseInt(Math.random()*600);
+            let size = parseInt(Math.random()*80+12)
+            document.getElementById('box').innerHTML="<h2>爱你哦~</h2><span id='xing'>❥</span>";
+            let xing = document.getElementById('xing');
+            xing.style.top = y + "px";
+            xing.style.left = x + "px";
+            xing.style.fontSize = size + "px";
+        },10)
+    }
+    
+</script>
+</body>
+</html> 

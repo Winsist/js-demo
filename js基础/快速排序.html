@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快速排序</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background: pink;
+            margin-top: 20px;
+            overflow: hidden;
+            /* padding-top: 0px; */
+            /* border-top: 1px solid pink; */
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <div class="son"></div>
+    </div>
+    <script>
+        /*
+        1、先从数列中去取一个数作为基准
+        2、然后大的放右边，小的放左边
+        3、重复上面的步骤
+        
+        
+        */
+        let arr = [72,6,57,88,60,42,83,73,48,85];
+        var low = 0;
+        var high = arr.length-1;
+        var tmp = arr[0];
+        while(low <high){
+            while(low <high && arr[high] >=tmp){
+                high--;
+            }
+
+            arr[low] = arr[high];
+            while(low <high && arr[low]<=tmp){
+                low++;
+            }
+            arr[high] = arr[low]
+        }
+        arr[low] = tmp;
+        console.log(low);
+        console.log(arr[low]);
+        console.log(arr);
+        // return low;
+    </script>
+</body>
+</html>

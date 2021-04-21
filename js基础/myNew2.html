@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        function Person(name,age){
+            var obj = {};
+            obj.name = name;
+            obj.age = age;
+            return obj;
+        }
+        var per1 = new Person('mengyun',18)
+        console.log(per1);
+
+        function _new(fn,...args){
+            //1、创建一个空对象
+            var obj = Object.create(fn.prototype);//fn.prototype代表 用当前对象的原型去创建
+            //现在obj就代表Person了,但是参数和this指向没有修改
+            var rel = fn.apply(obj,args);
+            //正常规定,如何fn返回的是null或undefined(也就是不返回内容),我们返回的是obj,否则返回rel
+            return rel instanceof Object ? rel : obj
+        }
+        var per2 = _new(Person,'lll',15);
+        console.log(per2);
+
+
+    </script>
+</body>
+</html>

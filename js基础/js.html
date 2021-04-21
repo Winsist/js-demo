@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+          
+        
+        // break关键字：如果在循环中使用，遇到了break,则立刻跳出当前所在的循环，注意是“当前”
+
+        for(var i = 0;i < 10; i++){
+            while(true){
+                console.log('哈哈哈'); 
+                break;
+                console.log('嘿嘿嘿');
+            }
+        }                                //10次哈哈哈
+
+
+        while(true){
+                console.log('哈哈哈'); 
+                break;
+                console.log('嘿嘿嘿');
+            }
+            console.log('嘎嘎，我出来了');    //1次哈哈哈，一次嘎嘎，我出来了
+
+        //求1~100的累加值，但要求碰到个位数为3的数则停止累加
+        var s=0;
+        for(i=1;i<=100;i++){
+            if(i ==3 || i%10==3){
+                break
+            }
+            s=s+i
+        }
+        console.log(s); 
+        //求1~100的累加值，但要求碰到个位数为3的数则停止累加
+        var s=0;
+        for(i=1;i<=100;i++){
+            if(i%10==3){
+                continue
+            }
+            s=s+i
+        }
+        console.log(s);     //4570
+
+
+        for(i=100;i<=200;i++){
+            if(i%7==0){
+                console.log(i);
+                break
+            }
+        }
+
+        // continue关键字：如果在循环中遇到了continue关键字,直接开始下一次循环
+         
+        //求100~200之间所有的奇数的和(用continue)
+        var s=0;
+        for(i=100;i<=200;i++){
+            if(i%2==0){
+                continue
+            }
+            s+=i;
+        }
+        console.log(s);     //7500  
+    </script>
+</body>
+</html>

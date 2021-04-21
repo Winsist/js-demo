@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">111</div>
+    
+    <script>
+        
+        // var a = {
+        //     i: 1,
+        //     toString() {
+        //         return a.i++;
+        //     }
+        // }
+
+        // if( a == 1 && a == 2 && a == 3 ) {
+        // console.log(1);
+        // }
+        
+        // var a = 10;
+        // (function () {
+        //     console.log(a)
+        //     a = 5
+        //     console.log(window.a)
+        //     var a = 20;
+        //     console.log(a)
+        // })()
+//如何把一个字符串的大小写取反（大写变小写小写变大写），例如 ’AbC' 变成 'aBc' 。
+        // toUpperCase()
+        // toLowerCase()
+        var a='AbC';
+        arr=a.split("");
+        var str='';
+        console.log(arr);
+        for(var i=0;i<arr.length;i++){
+            //假设他是大写,若成立，则证明原来就是大写，那就让他变成小写，若不成立，则证明原来是小写，现在要变成大写
+            if(arr[i].toUpperCase()==arr[i]){
+                arr[i]=arr[i].toLowerCase();
+                // str+=arr[i];
+            }else{
+                arr[i]=arr[i].toUpperCase();
+                // str+=arr[i];
+            }
+            str+=arr[i];
+        }
+        console.log(str);
+
+    </script>
+</body>
+
+</html>

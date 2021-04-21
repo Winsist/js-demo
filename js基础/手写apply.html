@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var foo = {
+            val: 1
+        }
+        function bar(arr) {
+            console.log(this.val);
+            console.log(arr[0]);
+            console.log(arr[1]);
+        }
+
+        // Function.prototype.myApply = function (ctx) {
+        //     var ctx = ctx || window;
+        //     ctx.fn = this;//获取调用call的函数
+        //     console.log(arguments);
+        //     console.log(...arguments[1]);
+        //     var arr = [...arguments[1]];
+        //     console.log(arr);
+        //     var res;
+        //     if (!arr) {
+        //         res = ctx.fn();
+        //     } else {
+        //         const args = arr;//数组
+        //         res = ctx.fn(args);
+        //     }
+
+        //     delete ctx.fn;
+        //     return res;
+        // }
+
+        Function.prototype.myApply = function (ctx) {
+            var ctx = ctx || window;
+            ctx.fn = this;//获取调用apply的函数
+            var res = arguments[1] ? ctx.fn([...arguments[1]]) :ctx.fn()
+            
+
+            delete ctx.fn;
+            return res;
+        }
+
+        
+
+        bar.myApply(foo, ['wmy', '18']);
+
+
+
+
+    </script>
+</body>
+
+</html>

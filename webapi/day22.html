@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #box{
+        position: relative;
+        width: 100%;
+        height: 600px;
+        background: #000;
+        margin-top: 20px;
+    }
+    #xing{
+        position: absolute;
+        /* color: yellow; */
+        color: red;
+        font-size: 40px;
+        transform: rotate(90deg);
+    }
+    #xin{
+        position: absolute;
+        color: yellow;
+        font-size: 40px;
+        transform: rotate(90deg);
+    }
+    </style>
+</head>
+<body>
+    <input type="button" value="start" id="btn">
+    <div id="box"></div>
+<script>
+    document.getElementById('btn').onclick=function(){
+        setInterval(function(){
+            let x = parseInt(Math.random()*1100);
+            let y = parseInt(Math.random()*600);
+            let size = parseInt(Math.random()*40+12)
+            // document.getElementById('box').innerHTML="<span id='xing'>★❥(^_-)</span>";
+            document.getElementById('box').innerHTML="<span id='xin'>★</span><span id='xing'>❥</span>";
+            // document.getElementById('box').innerHTML="<span id='xing'>❥</span>";
+            document.getElementById('xing').style.top = y + "px";
+            document.getElementById('xing').style.left = x + "px";
+            document.getElementById('xing').style.fontSize = size + "px";
+
+            document.getElementById('xin').style.top = x + "px";
+            document.getElementById('xin').style.left = y + "px";
+            document.getElementById('xin').style.fontSize = size + "px";
+        },10)
+    }
+    
+</script>
+</body>
+</html> 

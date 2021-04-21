@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //实例对象的属性和原型对象中属性重名的问题
+
+        //实例对象访问属性和方法，应该先从实例对象中找，找到了就直接用，找不到就去指向的原型对象中找，找到了就使用，找不到呢？就是undefined
+        
+        function Person(age){
+            this.age=age;
+        }
+        Person.prototype.age=18;
+        var per=new Person(15);
+        console.log(per.age);   //15
+        console.log(per.sex);   //undefined
+
+
+
+        // function Person(){
+            
+        // }
+        // Person.prototype.age=18;
+        // var per=new Person();
+        // console.log(per.age);   //18
+
+        //通过实例对象能否改变原型对象中的属性值？
+        per.age=30;
+        console.log(per.age);   //30,改变的是实例对象中属性的值，不是原型对象
+        console.dir(per);
+
+
+        //就想改变原型对象中属性的值，怎么办？直接通过原型对象.属性=值;可以改变
+        Person.prototype.age=40;
+        console.dir(per);
+
+    
+
+        
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 100%;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            background-color: #444;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        var count = 1;
+        var container = document.getElementById('container');
+
+        function getUserAction() {
+            container.innerHTML = count++;
+            console.log(111);
+            // console.log(`我执行啦${count++}`);
+        };
+        // function throttle(func, wait) {
+        //     var context, args;
+        //     var previous = 0;
+
+        //     return function () {
+        //         var now = +new Date();
+        //         context = this;
+        //         args = arguments;
+        //         if (now - previous > wait) {
+        //             func.apply(context, args);
+        //             previous = now;
+        //         }
+        //     }
+        // }
+        // function throttle(func, wait) {
+        //     var timeout;
+        //     return function () {
+        //         context = this;
+        //         args = arguments;
+        //         if (!timeout) {
+        //             timeout = setTimeout(function () {
+        //                 timeout = null;
+        //                 func.apply(context, args)
+        //             }, wait)
+        //         }
+
+        //     }
+        // }
+
+        // function throttle(fn,delay){
+        //     var previous = 0;
+        //     return function(){
+        //         var now = +new Date();//时间戳
+        //         if(now - previous >delay){
+        //             fn.apply(this,arguments);
+        //             previous = now;
+        //         }
+        //     }
+        // }
+
+        function throttle(fn,delay){
+            var timer = null;
+            return function(){
+                if(!timer){
+                    timer = setTimeout(()=>{
+                        fn.apply(this,arguments);
+                        timer=null;
+                    },delay)
+                }
+            }
+        }
+
+
+
+        container.onmousemove = throttle(getUserAction, 1000);
+    </script>
+</body>
+
+</html>

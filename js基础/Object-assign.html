@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //    const obj={
+        //        name:'mengyun'
+        //    }
+        //    console.log(Object.prototype.toString.call(obj));//[object Object]
+        //    console.log(Object.prototype.toString.call(obj).slice(8, -1));//Object
+        // 通过 Object.prototype.toString.call(xxx) 可以判断一个目标的属性
+        // Object 会返回 [Function Object]
+        // Array 会返回 [Function Array]
+        //         const checkedType = (target) => {
+        //             return Object.prototype.toString.call(target).slice(8, -1);
+        //         }
+
+        //         // 浅拷贝
+        //         const shallowClone = (target) => {
+        //             // 设置结果
+        //             let result;
+
+        //             // 如果目标是对象，那么设置成对象
+        //             if (checkedType(target) === 'Object') {
+        //                 result = {};
+        //             } else if (checkedType(target) === 'Array') { // 如果目标是数组，那么设置成数组
+        //                 result = [];
+        //             }
+
+        //             // 通过 let...in... 遍历数组或者对象
+        //             // 并通过 hasOwnProperty 判断是否为自身的属性
+        //             for (let i in target) {
+        //                 if (target.hasOwnProperty(i)) {
+        //                     result[i] = target[i];
+        //                 }
+        //             }
+
+        //             // 返回拷贝结果
+        //             return result;
+        //         };
+
+        //         /* ———————————————— 测试数组 ———————————————— */
+        //         const arr1 = [1, 2, ['jsliang', 'JavaScriptLiang'], 4];
+        //         Array.prototype.sayHello = () => console.log('你好');
+        //         const arr2 = shallowClone(arr1);
+        //         arr2[2].push('LiangJunrong');
+        //         arr2[3] = 5;
+
+        //         console.log(arr1); // [ 1, 2, [ 'jsliang', 'JavaScriptLiang', 'LiangJunrong' ], 4 ]
+        //         console.log(arr2); // [ 1, 2, [ 'jsliang', 'JavaScriptLiang', 'LiangJunrong' ], 5 ]
+
+        //         /* ———————————————— 测试对象 ———————————————— */
+        //         const obj1 = {
+        //             name: 'jsliang',
+        //             like: ['eat', 'play'],
+        //         }
+        //         Object.prototype.sayHello = () => console.log('你好');
+        //         const obj2 = shallowClone(obj1);
+        //         console.log(obj2);
+        //         obj2.name = 'zhazhaliang';
+        //         obj2.like.push('sleep');
+
+        //         console.log(obj1); // { name: 'jsliang', like: [ 'eat', 'play', 'sleep' ] }
+        //         console.log(obj2); // { name: 'zhazhaliang', like: [ 'eat', 'play', 'sleep' ] }
+
+
+
+        //         const obj1 = {
+        //             username: 'LiangJunrong',
+        //             skill: {
+        //                 play: ['basketball', 'computer game'],
+        //                 read: 'book',
+        //             },
+        //             girlfriend: ['1 号备胎', '2 号备胎', '3 号备胎'],
+        //         };
+
+        //         const obj2 = Object.assign({}, obj1);
+        //         obj2.username = 'jsliang'; // 修改基本类型
+        //         obj2.skill.read = 'computer book'; // 修改二层基本类型
+        //         obj2.skill.play = ['footboll']; // 修改二层引用类型
+        //         obj2.girlfriend = ['之前的都是瞎吹的！']; // 修改一层引用类型
+
+        //         console.log(obj1);
+        //         // { username: 'LiangJunrong',
+        //         //   skill: { play: [ 'footboll' ], read: 'computer book' },
+        //         //   girlfriend: [ '1 号备胎', '2 号备胎', '3 号备胎' ] }
+        //         console.log(obj2);
+        // // { username: 'jsliang',
+        // //   skill: { play: [ 'footboll' ], read: 'computer book' },
+        // //   girlfriend: [ '之前的都是瞎吹的！' ] }
+
+        // var obj1 = {
+        //     name: 'mengyun',
+        //     age: 18,
+        //     hobby: { play: ['footboll'], read: 'book' },
+        //     eat: ['苹果', '香蕉', '菠萝'],
+        // };
+
+        // var obj2 = obj1;
+
+        // var obj3 = Object.assign({}, obj1);
+        // obj2.name = "meimei";
+        // obj3.age = "20";
+        // obj2.hobby.play = ["games"];
+        // obj3.hobby.read = ["news"];
+        // obj3.eat = ['哈密瓜']; // 修改一层引用类型
+        // console.log(obj1);
+        // console.log(obj2);
+        // console.log(obj3);
+
+        // var arr1=[1,2,3];
+        // var arr2 = arr1;
+        // arr2[1]='666';
+        // console.log(arr1);//[1, "666", 3]
+        // console.log(arr2);//[1, "666", 3]
+
+        // var arr3 = [5,6,7];
+        // var arr4 = [...arr3];
+        // arr4[1]='666';
+        // console.log(arr3);//[5,6,7]
+        // console.log(arr4);//[5, "666", 7]
+
+        function deepClone(target) {
+            if (typeof target !== 'object' || target == null) {
+                //target是null,或者不是数组、对象，直接返回
+                return target
+            }
+            let result;//初始化结果
+            if (target instanceof Array) {
+                result = []
+            } else {
+                result = {}
+            }
+            for (var prop in target) {
+                if (target.hasOwnProperty(prop)) {//保证key不是原型上的属性
+                    result[prop] = deepClone(target[prop]);
+                }
+            }
+            return result;
+        }
+
+        var obj1 = {
+            name: 'mengyun',
+            age: 18,
+            hobby: { play: ['footboll'], read: 'book' },
+            eat: ['苹果', '香蕉', '菠萝'],
+        };
+
+        var obj2 = obj1;
+
+        var obj3 = deepClone(obj1);
+        obj2.name = "meimei";
+        obj3.age = "20";
+        obj2.hobby.play = ["games"];
+        obj3.hobby.read = ["news"];
+        obj3.eat = ['哈密瓜']; // 修改一层引用类型
+        console.log(obj1);
+        console.log(obj2);
+        console.log(obj3);
+
+        
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

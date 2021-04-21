@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //-----------------原型指向改变如何添加方法？？？？
+        //如果原型指向改变了，那么就应该在原型改变指向之后添加原型方法
+
+
+        //人的构造函数
+        // function Person(age){
+        //     this.age=10;
+        // }
+        // //人的原型对象方法
+        // Person.prototype.eat=function(){
+        //     console.log('人的吃');
+        // };
+        // //学生的构造函数
+        // function Student(sex){
+        //     this.sex=sex;
+        // }
+
+        // Student.prototype.sayHi=function(){
+        //     console.log('你好');
+        // };
+
+        // //学生的原型，指向了一个人的实例对象
+        // Student.prototype=new Person(10);
+
+        // var stu=new Student();
+        // stu.eat();  //人的吃
+        // stu.sayHi();    //报错：stu.sayHi is not a function
+        // // var per = new Person(10);
+        // // per.sayHi();
+        // //总结：以上是先添加方法，在改变指向，所以会报错，若要访问添加的方法，可以先改变指向，再添加方法,如下：
+
+        //人的构造函数
+        function Person(age){
+            this.age=10;
+        }
+        //人的原型对象方法
+        Person.prototype.eat=function(){
+            console.log('人的吃');
+        };
+        //学生的构造函数
+        function Student(sex){
+            this.sex=sex;
+        }
+        //学生的原型，指向了一个人的实例对象
+        Student.prototype=new Person(10);
+
+        Student.prototype.sayHi=function(){
+            console.log('你好');
+        };
+
+        var stu=new Student();
+        stu.eat();  //人的吃
+        stu.sayHi();    //你好
+
+        console.dir(stu);
+
+        //========================================================
+
+        function Student(){
+            
+        }
+        //先添加原型方法
+        Student.prototype.study=function(){
+            console.log('我要学习');
+        };
+        //指向改变了
+        Student.prototype={
+            eat:function(){
+                console.log('哈哈');
+            }
+        }
+        var stu=new Student();
+        stu.eat();  //哈哈
+        stu.study();    //报错：stu.study is not a function
+
+
+        function Student(){
+            
+        }
+        //指向改变了
+        Student.prototype={
+            eat:function(){
+                console.log('哈哈');
+            }
+        }
+
+        //指向改变之后再添加原型方法
+        Student.prototype.study=function(){
+            console.log('我要学习');
+        };
+        var stu=new Student();
+        stu.eat();  //哈哈
+        stu.study();    //我要学习
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>

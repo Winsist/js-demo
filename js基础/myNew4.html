@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+            this.eat = function(){
+                console.log('吃')
+            }
+            return {
+                sex:'男'
+            }
+        }
+        Person.prototype.say = function(){
+            console.log('你好')
+        }
+
+        // 1创建一个新对象。
+        // 2这个新对象会被执行[[原型]]连接。
+        // 3属性和方法被加入到 this 引用的对象中。并执行了构造函数中的方法.
+        // 4如果函数没有返回其他对象，那么返回创建的这个新对象，否则返回构造函数的执行结果
+        // function Person(name,age){
+        //     var obj = {};
+        //     obj.name = name;
+        //     obj.age = age;
+        //     return obj;
+        // }
+        // var per1 = new Person('mengyun',18);
+        // console.log(per1);
+
+        function _new(fn,...args){
+            //1、创建一个空对象
+            //2、这个对象的 __proto__ 指向 fn 这个构造函数的原型对象
+            //将 obj 的原型指向构造函数，这样 obj 就可以访问到构造函数原型中的属性
+            var obj = Object.create(fn.prototype);
+            //3、改变this指向,
+            //改变构造函数 this 的指向到新建的对象，这样 obj 就可以访问到构造函数中的属性
+            var res = fn.apply(obj,args);
+            // 4. 如果构造函数返回的结果是引用数据类型，则返回运行后的结果,否则返回新创建的 obj
+            if ((res!==null && typeof res == "object") || typeof res == "function") {
+                return res;
+            }
+            return obj;
+        }
+        var per2 = _new(Person,'lll',15);
+        console.log(per2);
+        console.log(per2.name);
+        console.log(per2.age);
+        console.log(per2.sex);
+    </script>
+</body>
+</html>

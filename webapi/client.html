@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 150px;
+        background: green;
+        border: 20px solid yellow;
+        margin-left: 20px;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+       
+        var box = document.getElementById('box');
+        window.onscroll=function(e){
+            console.log(e);  
+        }
+        // console.log(box.scrollWidth);      //150
+        // console.log(box.scrollHeight);      //100
+        // console.log(box.scrollLeft);      //20
+        // console.log(box.scrollTop);        //20
+
+
+
+
+
+        /*
+       client系列：可视区域
+       clientWidth:可视区域的宽(没有边框)，边框内部的宽度
+       clientHeight:可视区域的高（没有边框），边框内部的高度
+       clientLeft:左边边框的宽度
+       clientTop:上面边框的宽度
+       
+       */ 
+        
+    </script>
+</body>
+</html>

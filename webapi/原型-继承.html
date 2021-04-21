@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //面向对象的特征：封装、继承、多态
+
+        //面向对象的编程语言中有类(class)的概念(也是一种特殊的数据类型)，但是js不是面向对象的语言，所以，js中没有类(class),但是js可以模拟面向对象的思想编程，js中会通过构造函数来模拟类的概念(class)
+
+        //继承：首先继承是一种关系，类(class)与类之间的关系，js中没有类，但是可以通过构造函数模拟类，然后通过原型来实现继承
+        //继承也是为了数据共享，js中的继承也是为了实现数据共享
+
+        //原型作用之一：数据共享，节省内存空间
+        //原型作用之二：为了实现继承
+
+        //继承是一种关系：
+        //父类级别与子类级别的关系
+
+        //js中通过原型来实现继承(改变原型的指向)
+
+        //多态：一个对象有不同的行为，或者是同一个行为针对不同的对象，产生不同的结果，要想有多态，就要先有继承，js中可以模拟多态，但是不会去使用，因为会导致数据不能共享，占用大量内存空间
+        
+
+        //动物的构造函数
+        function Animal(name,weight){
+            this.name=name;
+            this.weight=weight;
+        }
+        //动物的原型的方法
+        Animal.prototype.eat=function(){
+            console.log('吃')
+        };
+
+        //狗的构造函数
+        function Dog(color){
+            this.color=color;
+        }
+
+        Dog.prototype=new Animal('大黄',100);
+        Dog.prototype.bite=function(){
+            console.log("咬人");
+        }
+        var dog=new Dog('red');
+        dog.eat();
+
+
+
+        //总结：要想继承，就先改变原型的指向
+
+        // (function(){
+        //     console.log(this);  //window
+
+        // })()
+        
+    </script>
+</body>
+</html>

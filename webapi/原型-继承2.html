@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //为了数据共享，改变原型指向，做到了继承-----通过改变原型指向实现的继承
+        //缺陷：因为改变原型指向的同时实现继承，直接初始化了属性，继承过来的属性的值都是一样的了，所以，这就是问题
+        //只能重新调用对象的属性进行重新赋值
+
+        //解决方案：继承的时候，不用改变原型的指向，直接调用父级的构造函数的方式来为属性赋值就可以了------------借用构造函数：把要继承的父级的构造函数拿过来使用一下就可以了
+
+
+        function Person(name,age,sex,weight){
+            this.name=name;
+            this.age=age;
+            this.sex=sex;
+            this.weight=weight;
+        }
+        Person.prototype.sayHi=function(){
+            console.log('你好');
+        };
+        function Student(name,age,sex,weight,score){
+            //借用构造函数
+            Person.call(this,name,age,sex,weight);  //this指的是学生的实例对象，Person.call就相当于把Person这个函数拿到该函数中使用了，但是此时只继承了属性
+            this.score=score;
+        }
+
+        var stu1=new Student('小明',10,'男',100,55);
+        console.log(stu1);
+        var stu2=new Student('小红',15,'女',22,33);
+        console.log(stu2);
+
+
+        //借用构造函数：构造函数的名字.call(当前对象,属性，属性，属性....);
+        //解决了属性继承，并且值不重复的问题
+        //但是还有缺陷：父级类别中的方法不能被继承
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

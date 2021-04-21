@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Function.prototype.myCall = function (context = window) {
+        //     // 设置 fn 为调用 myCall 的方法
+        //     context.fn = this;
+
+        //     // 获取剩余参数
+        //     const args = Array.from(arguments).slice(1);
+
+        //     // 调用这个方法，将剩余参数传递进去
+        //     const res =arguments.length>1? context.fn(...args) : context.fn();
+
+        //     // 删除这个变量
+        //     delete context.fn;
+
+        //     // 返回 result 结果
+        //     return res;
+        // };
+
+        // this.a = 1;
+
+        // const fn = function () {
+        //     this.a = 2;
+        //     console.log(this.a);
+        // }
+
+        // fn.myCall(fn);
+
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.eat=function(){
+                console.log('吃')
+            }
+        }
+        Person.prototype.sayHi = function () {
+            console.log('你好');
+        };
+        function content(obj){
+            function F(){};
+            F.prototype = obj;
+            return new F()
+        }
+        var con = content(Person.prototype);
+        console.log(con);
+        function Sub(){
+            Person.call(this);
+        }
+        Sub.prototype = con;
+        con.constructor = Sub;
+
+
+        var sub = new Sub('梦云');
+        
+        console.log(sub.name);
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

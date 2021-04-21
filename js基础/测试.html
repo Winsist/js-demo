@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="help">Helpful notes will appear here</p>
+<p>E-mail: <input type="text" id="email" name="email"></p>
+<p>Name: <input type="text" id="name" name="name"></p>
+<p>Age: <input type="text" id="age" name="age"></p>
+    <script>
+        // function test() {
+        //     var n = 4399;
+
+        //     function add() {
+        //         n++;
+        //         console.log(n);
+        //     }
+
+        //     return {
+        //         n,add
+
+        //     };
+        // };
+
+        // var result = test();
+        // var result2 = test();
+
+        // result.add(); // 4400
+        // result.add(); // 4401
+
+        // console.log(result.n); // 4399
+
+        // result2.add(); // 4400
+
+        // function Foo() {
+        //     var i = 0;
+        //     return function() {
+        //         i++;
+        //         console.log(i);
+        //     }
+        // }
+
+        // var f1 = Foo();
+        // var f2 = Foo();
+
+        // f1();//0
+        // f1();//1
+        // f2();//0
+
+        // function f1(){
+        //     console.log(this.a);
+        // }
+        // var obj1 = {
+        //     a:2,
+        //     f1:f1
+        // };
+        // var obj2 = {
+        //     a:3,
+        //     f1:f1
+        // };
+
+        // obj1.f1();//2
+        // obj2.f1();//3
+
+        // obj1.f1.apply(obj2);//3
+
+        // function foo(){
+        //     // setTimeout(()=>{
+        //     //     console.log(this.a)
+        //     // },100)
+        //     // var _self = this;
+        //     // setTimeout(function(){
+        //     //     console.log(this.a)
+        //     // },100)
+        //     console.log(this);
+        // }
+        // var obj1 = {
+        //     a:2222
+        // };
+        // var a='我是全局';
+        // foo.call(obj1);
+
+        // var number = 5;
+        // var obj = {
+        //     number: 3,
+        //     fn1: (function () {
+        //         var number;
+        //         this.number *= 2;
+        //         number = number * 2;
+        //         number = 3;
+        //         return function () {
+        //             var num = this.number;
+        //             this.number *= 2;
+        //             console.log(num);
+        //             number *= 3;
+        //             console.log(number);
+        //         }
+        //     })()
+        // }
+        // var fn1 = obj.fn1;
+        // fn1.call(null);//10 9
+        // obj.fn1();//3 27
+        // console.log(window.number);//20
+
+
+        function showHelp(help) {
+  document.getElementById('help').innerHTML = help;
+}
+
+// function setupHelp() {
+//   var helpText = [
+//       {'id': 'email', 'help': 'Your e-mail address'},
+//       {'id': 'name', 'help': 'Your full name'},
+//       {'id': 'age', 'help': 'Your age (you must be over 16)'}
+//     ];
+
+//   for (var i = 0; i < helpText.length; i++) {
+//     (function() {
+//        var item = helpText[i];
+//        document.getElementById(item.id).onfocus = function() {
+//          showHelp(item.help);
+//        }
+//     })(); // 马上把当前循环项的item与事件回调相关联起来
+//   }
+// }
+
+// setupHelp();
+
+
+
+
+    </script>
+</body>
+
+</html>

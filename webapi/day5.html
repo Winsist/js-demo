@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 200px;
+        height: 200px;;
+        background: pink;
+        opacity: 1;
+    }
+    #box3{
+        width: 100px;
+        height: 100px;;
+        background: pink;
+        position: absolute;
+        left: 0px;
+        top: 50px;
+    }
+    </style>
+</head>
+<body>
+    <!-- <input type="textarea" value="1111" id="txt"><br/>
+    <input type="button" value="请仔细阅读协议（5）" id="btn" disabled>
+    <script>
+        var time = 5;
+        var btn = document.getElementById('btn');
+        var txt = document.getElementById('txt');
+        var timer = setInterval(function(){
+            if(time>0){
+                time--;
+                btn.value="请仔细阅读协议("+time+")";
+            }else if(time == 0){
+                btn.value="同意";
+                btn.disabled=false;
+            }
+        },1000)
+        
+        btn.onclick=function(){
+                alert("恭喜你")
+            }   
+    </script> -->
+
+    <!-- <div id="box"></div>
+    <input type="button" value="按钮" id="btn">
+
+    <script>
+        var btn = document.getElementById('btn');
+        var box = document.getElementById('box');
+        btn.onclick=function(){
+            var opacity=10;
+            
+            var timer = setInterval(function(){
+                opacity--;
+                if(opacity<=0){
+                    clearInterval(timer);
+                }
+                box.style.opacity=(opacity)/10;
+                
+            },100)  
+        }
+
+    </script> -->
+
+    <input type="button" value="400px" id="btn1">
+    <input type="button" value="800px" id="btn2">
+    <div id="box3"></div>
+    <span>kkk</span>
+    <script>
+    /*
+    如果样式的代码是在style的标签中设置，外面是获取不到
+    如果样式的代码是在style的属性中设置，外面是可以获取 
+    
+    
+    */
+
+
+    var box3 = document.getElementById('box3');   
+    document.getElementById('btn1').onclick=function(){
+        // box3.style.left=400+"px"
+        console.log(box3.offsetLeft)
+    };
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     function F1(age){
+         this.age=age;
+     }  
+     function F2(age){
+         this.age=age;
+     } 
+     F2.prototype=new F1(10);
+     function F3(age){
+         this.age=age;
+     }  
+     F3.prototype=new F2(20); 
+     var f3=new F3(30);
+     console.log(f3.age);   //30
+
+
+     //===============================================================
+     //函数声明和函数表达式的区别：
+
+     if(true){
+        function f1(){
+            console.log(111)
+        }
+     }else{
+        function f1(){
+            console.log(2222)
+        }
+     }
+     f1();  //111,在ie8中是222，原因可能是函数的预解析，声明提前了，赋值的时候后者覆盖了前者
+
+     //函数声明如果放在if-else的语句中，在IE8的浏览器中会出现问题
+
+     var f2;
+     if(true){
+        f2=function(){
+            console.log(111)
+        }
+     }else{
+        f2=function(){
+            console.log(2222)
+        }
+     }
+     f2();  //都是111
+
+     //总结：以后宁愿用函数表达式，都不用函数声明
+
+
+
+     /*
+     函数中的this的指向：
+
+     1) 普通函数中的this是谁？--------------window
+     2) 对象.方法中的this是谁？---------------当前的实例对象
+     3) 定时器方法中的this是谁--------------window
+     4）构造函数中的this是谁？---------------当前的实例对象
+     5）原型对象方法中的this是谁？---------------当前的实例对象
+     
+     */
+
+     function f4(){
+         console.log(this); //window
+     }
+     f4();
+
+
+
+     //函数也是对象，对象不一定是函数(Math)
+
+     //对象中有__proto__原型，是对象
+     //函数中有prototype原型，是对象
+
+     console.dir(Math); //有__proto__,但是没有prototype
+
+     //对象中有__proto__,函数中应该又prototype
+
+     //如果一个东西里面有prototype,又有__proto__,说明是函数，也是对象
+
+     function F1(name){
+         this.name=name;
+     }
+     console.dir(F1);
+
+     //所有的函数实际上都是Function的构造函数创建出来的实例对象
+
+     var f5=new Function("num1","num2","return num1+num2");
+     console.log(f5(10,20));    //30
+     console.log(f5.__proto__ == Function.prototype);   //true
+
+     //所以，函数实际上也是对象
+        
+        
+        
+    </script>
+</body>
+</html>

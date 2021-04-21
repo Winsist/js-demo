@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+
+        function Person(name,age){
+            var obj = {};
+            obj.name = name;
+            obj.age = age;
+            return obj;
+        }
+        var per1 = new Person('mengyun',18);
+        console.log(per1);
+
+        function _new(fn,...args){
+            //1、创建一个空对象
+            //2、这个对象的 __proto__ 指向 fn 这个构造函数的原型对象
+            var obj = Object.create(fn.prototype);
+            //3、改变this指向
+            var res = fn.apply(obj,args);
+            // 4. 如果构造函数返回的结果是引用数据类型，则返回运行后的结果
+            // 否则返回新创建的 obj
+            var isObject = typeof res === 'object' && res !== null;
+            var isFunction = typeof res === 'function';
+            return isObject || isFunction ? res : obj;
+        }
+        var per2 = _new(Person,'lll',15);
+        console.log(per2);
+
+
+    </script>
+</body>
+</html>

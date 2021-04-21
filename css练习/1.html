@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1 { 
+            width: 300px;
+            background-color: pink;
+            height: 100px;
+            position: absolute;
+        }
+
+        .div2 {
+            position: absolute;
+            width: 300px;
+            background-color: black;
+            height: 100px;
+            /* overflow: hidden;  */
+        }
+        a{
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            background: pink;
+        }
+  
+        body {
+            font-size: 12px;
+        }
+     
+        
+    </style>
+</head>
+<body>
+    <a href="#" id="size-12">12</a>
+    <a href="#" id="size-14">14</a>
+    <a href="#" id="size-16">16</a> 
+
+    <p id="help">Helpful notes will appear here</p>
+<p>E-mail: <input type="text" id="email" name="email"></p>
+<p>Name: <input type="text" id="name" name="name"></p>
+<p>Age: <input type="text" id="age" name="age"></p>
+
+<script>
+    // for (var i=1;i<=5;i++){
+    //     setTimeout(function timer(){
+    //         console.log(i)
+    //     },i*1000)
+    // }
+
+    // function fun(n,o) {
+    //     console.log(o)
+    //     return {
+    //         fun:function(m){
+    //             return fun(m,n);
+    //         }
+    //     };
+    // }
+    // var a = fun(0); 
+    // a.fun(1);  
+    // a.fun(2);  
+    // a.fun(3);//undefined,?,?,?
+    // var b = fun(0).fun(1).fun(2).fun(3);//undefined,?,?,?
+    // var c = fun(0).fun(1);  
+    // c.fun(2);  
+    // c.fun(3);//undefined,?,?,?
+
+//     function Foo() {
+//     getName = function () { alert (1); };
+//     return this;
+// }
+// Foo.getName = function () { alert (2);};
+// Foo.prototype.getName = function () { alert (3);};
+// var getName = function () { alert (4);};
+// function getName() { alert (5);}
+
+// //请写出以下输出结果：
+// Foo.getName();
+// getName();
+// Foo().getName();
+// getName();
+// new Foo.getName();
+// new Foo().getName();
+// new new Foo().getName();
+
+var obj ={
+    id:'wmy',
+    cool:function(){
+        console.log(this.id)
+    }
+}
+
+var id='hcy';
+obj.cool();
+
+setTimeout(obj.cool.bind(obj),1000)
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

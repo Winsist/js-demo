@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //借用构造函数：构造函数的名字.call(当前对象,属性，属性，属性....);
+        //解决了属性继承，并且值不重复的问题
+        //但是还有缺陷：父级类别中的方法不能被继承
+
+
+        //实现继承的几种方式：
+        //1）原型实现继承(改变原型指向)
+        //2）借用构造函数实现继承
+        //3）组合继承：原型继承(属性和方法)+借用构造函数继承(属性)
+
+
+        function Person(name,age,sex,weight){
+            this.name=name;
+            this.age=age;
+            this.sex=sex;
+            this.weight=weight;
+        }
+        Person.prototype.sayHi=function(){
+            console.log('你好');
+        };
+        function Student(name,age,sex,weight,score){
+            //借用构造函数:属性值重复的问题
+            Person.call(this,name,age,sex,weight);  //this指的是学生的实例对象，Person.call就相当于把Person这个函数拿到该函数中使用了，但是此时只继承了属性
+            this.score=score;
+        }
+        //改变原型指向
+        Student.prototype=new Person(); //不传值，此时只继承方法
+
+        var stu1=new Student('小明',10,'男',100,55);
+        console.log(stu1);
+        stu1.sayHi();
+        var stu2=new Student('小红',15,'女',22,33);
+        console.log(stu2);
+        stu2.sayHi();
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

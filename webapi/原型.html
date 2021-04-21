@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+      //---------------------------------------------------------2020.1.3
+    /*
+    
+    自定义构造函数创建对象：四件事
+    1、在内存中申请一块空闲的空间，存储创建的对象
+    2、this就是当前实例化的对象
+    3、设置对象中的属性和方法(为对象添加属性和方法，为属性和方法赋值)
+    4、把创建后的对象返回
+
+    */
+
+      //自定义构造函数创建对象
+      function Person(name,age){
+          this.name=name;
+          this.age=age;
+          this.sayHi=function(){
+              console.log("您好");
+          };
+      }
+
+      //工厂模式创建对象
+      function createObject(name,age){
+          var obj = new Object();
+          obj.name=name;
+          obj.age=age;
+          obj.sayHi=function(){
+              console.log("您好");
+          };
+          return obj;
+      }
+      //创建对象---实例化一个对象，的同时对属性进行初始化
+      var per1 = new Person('梦云',18);   //自定义构造函数创建对象
+      var per2 = createObject('帅帅',18);  //工厂模式创建对象
+
+      console.dir(per1);    //实例对象
+      console.dir(Person);  //构造函数 
+
+      //实例化对象的构造器(构造函数)
+      //实例对象的构造器是指向Person的，结果是true,所以，这个实例对象per就是通过Person来创建的 
+      console.log(per1.constructor==Person) //true
+      console.log(per1.__proto__.constructor==Person) //true
+      console.log(per1.__proto__.constructor==Person.prototype.constructor)  //true
+      console.log(per1.__proto__==Person.prototype)  //true
+
+
+      //构造函数
+      function Animal(name){
+          this.name=name;
+      }
+      //实例对象(dir,看对象的结构)
+      var dog = new Animal('大黄');
+      console.dir(dog);    //实例对象
+      console.dir(Animal);  //构造函数 
+
+      console.log(dog.__proto__.constructor==Person) //false
+      console.log(dog.__proto__.constructor==Animal) //true
+
+      //so，判断这个对象是不是这种数据类型,有以下几种方式
+      console.log(dog.constructor==Animal) //true
+      console.log(dog instanceof Animal) //true
+
+
+      /*
+      总结：
+      1、实例对象是通过构造函数来创建的---创建的过程叫实例化
+      2、如何判断对象是不是这个数据类型？
+        1）通过构造器的方式： 实例对象.构造器==构造函数的名字；
+        2）对象 instanceof 构造函数的名字；
+        尽可能的使用方法2来识别？？？
+
+      */
+
+
+      //-------------原型的引入-------------------------------------
+      function Person(name,age){
+          this.name=name;
+          this.age=age;
+          this.eat=function(){
+            console.log(111)
+        }
+      }  
+      
+      var p1=new Person("小红",20);
+      var p2=new Person("哈哈",30);
+
+      console.log(p1); 
+      console.log(p2);
+
+      console.log(p1==p2);  //false
+      console.log(p1.eat==p2.eat);  //false,说明不是同一个方法
+
+      for(var i=0;i<100;i++){
+        var p=new Person("啦啦",20);
+        // p.eat();  //开100个空间，浪费内存，如何解决？？
+      }
+
+
+      //解决方法：把eat方法抽离出来，这样调用的eat就是同一个方法了
+
+      function myEat(){
+        console.log(111);
+      }
+      function Person(name,age){
+          this.name=name;
+          this.age=age;
+          this.eat=myEat;
+      }  
+      console.log(p1.eat==p2.eat);  //true，此时已经节省空间了
+
+      //但是这么做存在一个隐患，比如我定义了一个变量，var myEat =10;呢？？？？这样就导致命名冲突了，如何解决？？？
+
+
+      //通过原型来添加方法,解决数据共享，节省内存空间
+
+      function Plant(name){
+        this.name=name;
+      }
+      Plant.prototype.grow=function(){
+          console.log('长高了');
+      }
+
+      var tree1=new Plant("松树");
+      var tree2=new Plant("柏树");
+
+      console.dir(tree1);
+      console.dir(Plant);
+      
+      
+      /*
+      实例对象中有个属性，__proto__,也是对象，叫原型，不是标准的属性，浏览器使用的；
+      构造函数中有一个属性，prototype,也是对象，叫原型，是标准属性，程序员使用
+      
+
+      原型   __proto__ 或者是prototype,都是原型对象
+      原型的作用：数据共享，节省内存空间
+
+      */
+     
+
+      //-----------------------------------2020.1.4
+
+      //通过构造函数实例对象，并初始化
+      var arr = new Array(10,20,30,40);
+      //join是方法，实例对象调用的方法
+      arr.join("|");
+      console.dir(arr);
+      //join方法在实例对象__proto__原型
+      console.log(arr.__proto__==Array.prototype);  //true
+
+
+
+      //构造函数
+      function Person(age,sex){
+          this.age=age;
+          this.sex=sex;
+      }
+      //通过构造函数的原型添加一个方法
+      Person.prototype.eat=function(){
+          console.log("和呃呃");
+      };
+      var mengyun=new Person(18,'女');
+
+      console.dir(Person);
+      console.dir(mengyun);
+      //构造函数，原型对象，实例对象之间的关系：
+      //    1) 实例对象是通过构造函数来创建的；
+      //    2）原型对象(prototype)在构造函数里面
+      //    3) 原型对象里面有个构造器，就是指向自己所在的原型对象所在的构造函数
+      //    4) 实例对象的原型对象(__proto__)指向的是该构造函数的原型对象(prototype)
+      //    5) 构造函数的原型对象(prototype)中的方法是可以被实例对象直接访问的
+
+
+      //什么样子的数据是需要写在原型中？需要共享的数据就可以写在原型中
+      //原型的作用之一：数据共享
+
+      //属性需要共享，方法也需要共享
+      //不需要共享的数据写在构造函数中，需要共享的数据写在原型中
+
+
+
+
+      //简单的原型写法：
+
+      function Shuai(age,sex){
+          this.age=age;
+          this.sex=sex;
+      }
+      Shuai.prototype={
+          //手动修改构造器的指向
+          constructor:Shuai,
+          height:"180",
+          weight:"70kg",
+          eat:function(){
+              console.log("喝奶茶")
+          }
+      };
+
+      var shuaishuai = new Shuai(18,'男');
+      console.dir(shuaishuai.eat);
+      console.dir(shuaishuai);//但是这么写会出现问题，没有构造器了。。。解决办法，手动添加构造器
+      console.dir(Shuai);//但是这么写会出现问题，没有构造器了。。。解决办法，手动添加构造器
+
+
+      
+      //原型对象中的方法是可以相互访问的
+
+      function Hua(name){
+          this.name=name;
+      }
+      Hua.prototype.grow=function(){
+          console.log('长大了');
+          this.jiao()
+      };
+      Hua.prototype.jiao=function(){
+          console.log('浇水了')
+      };
+      var hua=new Hua('玫瑰');
+      hua.grow();//长大了 浇水了,说明---------原型对象中的方法是可以相互访问的
+
+
+
+
+
+
+
+      //实例对象使用的属性和方法，先在实例中查找，找到了则直接使用，如果没有，去创建实例对象的构造函数的原型对象中找
+      //实例对象使用的属性和方法如果实例对象中不存在，就会去原型对象中去找
+
+      function People(age,sex){
+          this.age=age;
+          this.sex=sex;
+          this.eat=function(){
+              console.log(111);
+          }
+      }
+      var people1=new People(18,'男');
+      console.log(people1.sex); //男
+      //............................
+      function People(age,sex){
+          this.age=age;
+          this.sex=sex;
+          this.eat=function(){
+              console.log(111);
+          }
+      }
+      People.prototype.sex='女';
+      var people1=new People(18,'男');
+      console.log(people1.sex); //还是男
+
+
+      //为内置对象添加原型方法：
+
+      //我们能否为系统的对象的原型中添加方法，相当于在改变源码
+
+      String.prototype.myReverse=function(){
+          for(var i=this.length;i>=0;i--){//this是实例对象
+              console.log(this[i]);
+          }
+      }
+      var str='hello';
+      str.myReverse();
+
+
+      //如何把局部变量变成全局变量？把局部变量给window就可以了
+
+      //通过自调用函数产生一个随机对象，在自调用函数外面，调用该随机对象方法产生随机数
+      (function (window){
+          //产生随机数的构造函数
+          function Random() {
+
+          }
+          //在原型对象中添加方法
+          Random.prototype.gatRandom = function(min,max){
+              return Math.floor(Math.random()*(max-min)+min);
+          }
+          //把局部Random对象暴露给顶级对象window,这样的话，外部可以直接使用这个对象
+          window.Random=Random;
+      })(window)
+      var rm = new Random();
+      console.log(rm.gatRandom(10,50));
+
+    </script>
+</body>
+</html>

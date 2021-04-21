@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #box{
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: #000;
+        margin-top: 20px;
+    }
+    .xing{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+
+        /* color: yellow;
+        font-size: 40px; */
+        /* transform: rotate(90deg); */
+    }
+    </style>
+</head>
+<body>
+    <input type="button" value="start" id="btn">
+    
+    <div id="box"></div>
+<script> 
+    document.getElementById('btn').onclick=function(){
+        setInterval(function(){
+            let x = parseInt(Math.random()*1100);
+            let y = parseInt(Math.random()*600);
+            let size = parseInt(Math.random()*40+12)
+            document.getElementById('box').innerHTML="<img src='../images/1.jpg' alt='' class='xing'><img src='../images/2.jpg' alt='' class='xing'>";
+            let imgList = document.getElementsByTagName('img');
+            for(i=0;i<imgList.length;i++){
+                imgList[i].style.left = x + "px";
+                imgList[i].style.top = y + "px";
+            }
+        },1000)
+    }
+    
+</script>
+</body>
+</html> 

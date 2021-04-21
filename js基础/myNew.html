@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        // var per1 = new Person('mengyun',18)
+        // console.log(per1);
+
+        // function _new(fn,...args){
+        //     //1、先申请一块空闲的空间，存储创建的新对象
+        //     var obj = {};
+        //     console.log(fn);
+        //     console.log(arguments);
+        //     console.log(args);
+        //     console.log(...args);
+        //     //2、设置对象的__proto__指向构造函数的prototypr
+        //     obj.__proto__ = fn.prototype;
+        //     //3、设置this为当前实例化对象
+        //     fn.apply(obj,args);
+        //     //4、把创建的对象返回
+        //     return obj
+        // }
+
+
+        function _new(fn){
+            //1、先申请一块空闲的空间，存储创建的新对象
+            var obj = {};
+            console.log(fn);
+            const args = Array.from(arguments).slice(1);
+            //2、设置对象的__proto__指向构造函数的prototypr
+            obj.__proto__ = fn.prototype;
+            //3、设置this为当前实例化对象
+            fn.apply(obj,args);
+            //4、把创建的对象返回
+            return obj
+        }
+        var per2 = _new(Person,'lll',15);
+        console.log(per2);
+
+
+    </script>
+</body>
+</html>

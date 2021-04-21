@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //函数：把一大堆重复的代码封装，在需要的时候直接调用即可
+        //函数的作用：代码的重用
+
+        //函数的定义
+        // function 函数的名字(){
+        //     函数体
+        // }
+
+        //函数的调用
+        // 函数名();
+
+
+        //案例：求两个数字的和
+        // function sum (n1,n2) {
+        //     return n1+n2
+        // }
+        // console.log(sum(5,6));
+
+        // //案例：求两个数字的最大值
+        // function maxNumber (n1,n2) {
+        //     var max = n1>n2 ? n1 : n2
+        //         console.log(max)
+        // }
+        // maxNumber(5,6);
+
+
+        //注意：函数名不能重复，否则会出现覆盖，命名要用驼峰命名法
+
+        // function f1(){
+        //     console.log("hahah")
+        // }
+        // function f1(){
+        //     console.log("哈哈哈")
+        // }
+        // f1();       //哈哈哈
+
+        
+        //函数参数：在函数定义的时候，函数名字后面的小括号里的变量就是参数，目的是函数在调用的时候，用户传进来的值操作
+        //形参：函数在定义的时候，小括号里的变量叫形参
+        //实参：函数在调用的时候，小括号里传入的值叫实参，实参可以是变量，也可以是值
+
+        // function sum (n1,n2) {
+        //     console.log(n1+n2);
+        // }
+        // sum(5,6);
+
+        // function sum (n1,n2) {
+        //     console.log(n1+n2);
+        // }
+        // var x = 5;
+        // var y = 6;
+        // sum(x,y);
+
+
+        //函数的返回值：在函数内部有return关键字，并且在关键字后面有内容，这个内容被返回了
+        //当函数调用之后，需要这个返回值，那么就定义变量接收,即可
+
+
+
+        //这是一个有参数有返回值的函数
+        // function getSum (n1,n2) {
+        //    return  n1 + n2;   //把和返回
+        // }
+        // var result = getSum(50,6);
+        // console.log(result)
+
+
+        //如果一个函数中有return,那么这个函数就有返回值
+        //如果一个函数中没有return,那么这个函数就没有返回值
+
+        //如果一个函数没有返回值，但是在调用的时候接收了，那么结果就是undefined
+        // function f1 (n1,n2) {
+        //   var s= n1 + n2;   //把和返回
+        // }
+        // var result = f1(500,6);
+        // console.log(result)    //undefined
+
+
+        //return后面的内容是不会执行的
+        // function f2 (n1,n2) {
+        //   var s= n1 + n2;   //把和返回
+        //   return s;
+        //   console.log("我太好看了")
+        // }
+        // var result = f2(5000,6);
+        // console.log(result)    //5006
+
+        //若函数调用时，f1(),这个括号不写，输出的的f1函数的代码
+
+
+        //命名函数：函数如果有名字，就是命名函数
+        //匿名函数：函数如果没有名字，就是匿名函数(匿名函数不能直接调用)
+        // var f2=function () {
+        //     console.log('哈哈哈')
+        // }
+        // f2();
+
+        //像这种，把一个函数给一个表达式，此时形成了函数表达式，
+        //var 变量=function(){}
+        //如果是函数表达式，那么此时前面的变量中存储的就是一个函数，而这个变量就相当于是一个函数，就可以直接加小括号调用了
+
+        //函数声明：重名会覆盖
+        // function f1() {
+        //     console.log("哈哈哈");
+        // }
+        // f1();               //嘎嘎啊
+        // function f1() {
+        //     console.log("嘎嘎啊");
+        // }
+        // f1();               //嘎嘎啊
+
+        // //函数表达式：
+        // var f2 = function() {
+        //     console.log("哈哈哈");
+        // }
+        // f2();               //哈哈哈
+        // f2 = function() {
+        //     console.log("嘎嘎啊");
+        // }
+        // f2();               //嘎嘎啊
+
+        // //函数的自调用，没有名字，调用-----声明的同时，直接调用
+        // //一次性的-------安全
+        // (function(){
+        //     console.log("menegyun")
+        // })()
+
+
+        //函数也是一种数据类型
+        //函数声明，fn是变量，fn是参数
+        //函数可以作为参数使用，如果一个函数作为参数，那么我们说这个参数(函数)可以叫回调函数
+        //只要看到了一个函数作为参数使用了，那就是回调函数
+        // function f1(fn){
+        //     fn();
+        // }
+        // function f2(){
+        //     console.log("哦，这也可以");
+        // }
+        // f1(f2);
+
+
+        //函数是可以作为返回值使用的
+        /* function f1(){
+            console.log("f1函数调用了");
+            return function () {
+                console.log("haha");
+            }
+        }
+        //因为有返回值，所以要有个变量接收
+        var ff=f1();   //调用,此时ff就是一个函数了
+        ff(); */
+
+        
+
+        /*作用域：使用范围
+          全局变量:声明的变量是使用var声明的，那么这个变量就是全局变量，全局变量可以在页面的任何位置使用
+          除了函数以外，其他的任何位置定义的变量都是全局变量
+          局部变量：在函数内部定义的变量，是局部变量，外面不能使用
+
+          全局变量，如果页面不关闭，那么就不会释放，就会占空间，消耗内存
+          全局变量是不能被删除的，隐式全局变量是可以被删除的 
+
+
+          全局作用域：
+          局部作用域：
+
+          块级作用域：一对大括号就可以看成是一块，js没有块级作用域，只有函数除外
+        
+        隐式全局变量：声明的变量没有var，就叫隐式全局变量
+        
+        
+        
+        */
+
+
+
+        /*
+        作用域链： 
+        
+        */
+
+        /*
+        预解析：提前解析代码 
+        
+        */
+       //相当于把变量的声明提前了
+       /* console.log(num);   //没有报错，undefined
+       var num=10;    */
+
+
+       /* f1();    //没有报错，把函数的声明提前了 
+       function f1() {
+           console.log("haha");
+       } */
+
+
+       //函数调用的时候，会把函数的声明提升到作用域的上面
+    //    f1();
+    //    var num=20;   //这个变量的声明会提升到变量使用之前
+    //    function f1(){
+    //        console.log(num);   //undefined
+    //    }
+
+    /* f1();
+    console.log(c);     //9
+    console.log(b);     //9
+    console.log(a);     //报错
+    function f1() {
+        var a=b=c=9;        //(因为相当于var a;a=9;b=9;c=9;b和c相当于隐式全局变量)
+        console.log(a);     //9
+        console.log(b);     //9
+        console.log(c);     //9
+    } */
+
+    // f1();      //报错(变量的提升)
+    // var f1=function(){
+    //     console.log(a);     
+    //     var a=10;
+    // }
+
+    // //相当于
+    // var f1;
+    // f1();
+    // f1=function(){
+    //     console.log(a);     
+    //     var a=10;
+    // }
+
+    //--------------------------------2020.1.10----------
+
+    //函数的几个成员：
+
+    //函数中有一个name属性,是函数的名字，name属性是只读的，不能修改
+    //函数中有一个arguments属性,是实参的个数
+    //函数中有一个length属性,是形参的个数
+    function f1(x,y){
+        console.log(f1.name);
+        console.log(f1.arguments.length);   //4
+        console.log(f1.length); //2 
+        console.log(f1.caller); //调用者    自己直接调用自己就是null
+    }
+    f1.name="f2";   //打印出来还是f1
+    f1(1,2,3,4);   //f1
+    console.dir(f1);
+
+
+    var num=10;
+    console.log(typeof num);
+    var obj={};
+    console.log(obj instanceof Object);
+
+    //获取某个对象的数据类型的样子
+    //Object.prototype.toString.call(对象); //此时得到的就是这个对象的类型的样子
+
+    //此时输出的是Object的数据类型
+    console.log(Object.prototype.toString());   //[object Object]
+    //输出数组的数据类型
+    console.log(Object.prototype.toString.call([]));    //[object Array]
+
+    //Object.prototype.toString查看某个对象的数据类型的
+
+
+    //判断这个对象和传入的类型是不是同一个类型
+    function getFunc(type){
+        return function(obj){
+            return Object.prototype.toString.call(obj) === type;
+        }
+    }
+    var ff = getFunc("[object Array]");
+    var result = ff([10,20,30]);
+    console.log(result);    //true
+
+
+
+    //闭包：
+    /*
+    闭包的概念：函数A中，有一个函数B,函数B中可以访问函数A中定义的变量或者是数据，此时形成了闭包(这句话暂时不严谨)
+    闭包的模式：函数模式的闭包，对象模式的闭包
+    闭包的作用：缓存数据，延长作用域链
+    闭包的优点和缺点：缓存数据
+    闭包的应用：
+    
+    */
+
+    //函数模式的闭包：在一个函数中有一个函数 
+    function f1(){
+        var num=10;
+        function f2(){
+            console.log(num);
+        }
+        f2();
+    }
+    f1();
+
+    //对象模式的闭包：函数中有一个对象，对象可以访问函数中的值
+    function f3(){
+        var num=40;
+        var obj={
+            age:num
+        };
+        console.log(obj.age);   //40
+    }
+    f3();
+
+    //======================================================
+    function f4(){
+        var num=10;
+        num++;
+        console.log(num);
+    }
+    f4();   //11
+    f4();   //11
+    f4();   //11
+
+    function f5(){
+        var num=10;
+        return function(){
+            num++;
+            return num;
+        }
+    }
+    var ff5=f5();
+    console.log(ff5());  //11
+    console.log(ff5());  //12
+    console.log(ff5());  //13
+
+
+    //闭包案例产生多个相同的随机数
+
+    // function showRandom(){
+    //     var num = parseInt(Math.random()*10+1);
+    //     console.log(num);
+    // }
+    // showRandom();
+    // showRandom();
+    // showRandom();
+
+    //闭包的方式，产生三个随机数，但是都是相同的
+
+    function showRandom(){
+        var num = parseInt(Math.random()*10+1); //因为这行代码只执行了一次
+        return function(){
+            return num;
+        }
+    }
+    var sr=showRandom();
+    console.log(sr());
+    console.log(sr());
+    console.log(sr());
+
+    //总结：如果想要缓存数据，就把这个数据放在外层的函数和里层的函数的中间位置
+
+    //闭包的作用：缓存数据，优点也是缺陷，没有及时的释放(函数调用完后，里面的局部变量就释放了，但是由于闭包，一直在调用sr(),一直在使用num,延长了作用域链，导致num没有得到及时的释放)
+
+
+
+    //沙箱:环境，黑盒，在一个虚拟的环境中模拟真实世界，做实验，实验结果和真实世界的结果是一样的，但是不会影响真实世界
+
+    //避免命名冲突
+
+    //沙箱----小环境
+    (function (){
+        var num=10;
+        console.log(num);
+    })();
+
+    //沙箱----小环境
+    (function (){
+        var num=20;
+        console.log(num);
+    }());
+
+    //-----------------------------------------------------
+
+    //递归：函数中调用函数自己，此时就是递归，递归一定要有结束的条件，否则就是死循环
+    //一般应用在遍历上
+    //递归轻易不要用，效率很低
+    //求n个数字的和 5 ，计算1+2+3+4+5
+    var sum=0;
+    for(var i=1;i<=5;i++){
+        sum+=i;
+    }
+    console.log(sum);
+
+
+    //递归实现：求n个数字的和   n=5 ------> 5+4+3+2+1
+    function getSum(x){
+        if(x==1){
+            return 1;
+        }
+        return x+getSum(x-1);
+    }
+    console.log(getSum(5));
+
+    //案例：斐波那契数列
+    function getFib(x){
+        if(x==1 || x==2){
+            return 1;
+        }
+        return getFib(x-1)+getFib(x-2);
+    }
+    console.log(getFib(12));//144
+
+
+    /*
+    
+    面试的时候
+    1.你知道js的组成是什么吗？
+    2.原型和原型链的区别是什么？
+    3.闭包是什么？有什么特点和作用？
+    4.js继承几种方式？设计模式了解过吗？
+    5.es6的promise和ajax的区别联系是什么？
+    6.Vuex是什么？使用过程有什么？
+    7.生命周期钩子函数有哪几个？有何作用？
+    
+    
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
